@@ -25,7 +25,7 @@ public class PlayerCarScripts : MonoBehaviour
     
     [Header("Car steering")]
     public float wheelsTorque  = 35f;
-    private float presentTurnAngle =0f;
+    private float presentTurnAngle = 0f;
 
 
 
@@ -39,6 +39,10 @@ public class PlayerCarScripts : MonoBehaviour
 
         frontLeftWheelCollider.motorTorque = presentAcceleration;
         frontRightWheelCollider.motorTorque = presentAcceleration;
+        backLeftCollider.motorTorque = presentAcceleration;
+        backRightCollider.motorTorque = presentAcceleration;
+
+        
 
         presentAcceleration = accelerationforce * Input.GetAxis("Vertical");
         }
@@ -49,6 +53,24 @@ private void CarSteering(){
     presentTurnAngle = wheelsTorque * Input.GetAxis("Horizontal");
     frontLeftWheelCollider.steerAngle = presentTurnAngle;
     frontRightWheelCollider.steerAngle = presentTurnAngle;
+
+    SteeringWheels(frontLeftWheelCollider,frontLeftWheelTransform);
+    SteeringWheels(frontRightWheelCollider,frontRightWheelTransform);
+    SteeringWheels(backLeftCollider,backLeftWheelTransform);
+    SteeringWheels(backRightCollider,backRightWheelTransform);
+    
+}
+
+void SteeringWheels(WheelCollider wheelcol, Transform wheeltrans){
+    Vector3 position;
+    Quaternion rotation;
+
+    wheelcol.GetWorldPose(out position, out rotation);
+     rotation = rotation * Quaternion.Euler(new Vector3(0, 90, 0));
+
+    wheeltrans.position = position;
+    wheeltrans.rotation = rotation;
+
 }
     
 
