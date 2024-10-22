@@ -45,7 +45,7 @@ public class PlayerCarScripts : MonoBehaviour
 
         
 
-        presentAcceleration = accelerationforce * Input.GetAxis("Vertical");
+        presentAcceleration = accelerationforce * 15 * Input.GetAxis("Vertical");
         }
         
 
@@ -75,7 +75,7 @@ void SteeringWheels(WheelCollider wheelcol, Transform wheeltrans){
 }
 public void ApplyBreak(){
     if (Input.GetKey(KeyCode.Space))
-    presentBreak= breakingForce;
+    presentBreak= breakingForce*15 ;
      else
      presentBreak = 0f;
 
