@@ -17,7 +17,7 @@ public class PlayerCarScripts : MonoBehaviour
     public Transform backRightWheelTransform;
 
     [Header("Car Engine")]
-    public float accelerationforce = 3000f;
+    public float accelerationforce = 300f;
     public float breakingForce = 3000f;
     public float presentBreak=0;
     private float presentAcceleration= 0;
@@ -33,6 +33,7 @@ public class PlayerCarScripts : MonoBehaviour
         
         MoveCar();
         CarSteering();
+        ApplyBreak();
     }
     
     private void MoveCar(){
@@ -71,6 +72,19 @@ void SteeringWheels(WheelCollider wheelcol, Transform wheeltrans){
     wheeltrans.position = position;
     wheeltrans.rotation = rotation;
 
+}
+public void ApplyBreak(){
+    if (Input.GetKey(KeyCode.Space))
+    presentBreak= breakingForce;
+     else
+     presentBreak = 0f;
+
+        frontLeftWheelCollider.brakeTorque =presentBreak ;
+        frontRightWheelCollider.brakeTorque =presentBreak;
+        backLeftCollider.brakeTorque =presentBreak ;
+        backRightCollider.brakeTorque = presentBreak;
+
+    
 }
     
 
