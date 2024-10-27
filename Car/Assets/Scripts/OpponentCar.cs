@@ -16,6 +16,7 @@ public class OpponentCar : MonoBehaviour
 
     private void Update(){
         Drive();
+        print(destinationReached);
     }
     public void Drive(){
         if (transform.position !=destination)
@@ -23,12 +24,12 @@ public class OpponentCar : MonoBehaviour
             Vector3 destinationDirection = destination - transform.position;
             destinationDirection.y = 0;
             float destinationDistance = destinationDirection.magnitude;
-            if (destinationDistance != breakSpeed)
+            if (destinationDistance >= breakSpeed)
             {
                 //Steering
                 destinationReached = false;
                 Quaternion targetRotation =Quaternion.LookRotation(destinationDirection);
-                transform.rotation =Quaternion.RotateTowards(transform.rotation,targetRotation,turningSpeed*Time.deltaTime);
+                transform.rotation =Quaternion.RotateTowards(transform.rotation,targetRotation, turningSpeed * Time.deltaTime);
                 //move vehicle
                 transform.Translate(Vector3.forward*movingSpeed*Time.deltaTime);
             }
