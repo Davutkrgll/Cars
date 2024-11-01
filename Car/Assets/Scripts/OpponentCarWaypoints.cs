@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class OpponentCarWaypoints : MonoBehaviour
@@ -20,12 +21,13 @@ public class OpponentCarWaypoints : MonoBehaviour
     }
 
     private void Update(){
+
+        
        
         
         if (opponentCar.destinationReached==true)
         {
             currentWayPoint = currentWayPoint.nextWayPoint;
-            print("yarrak");
             opponentCar.LocateDestination(currentWayPoint.GetPosition());
         }
     }

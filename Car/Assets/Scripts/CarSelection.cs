@@ -10,10 +10,22 @@ public class CarSelection : MonoBehaviour
     [Header("Buttons")]
     public Button nextButton;
     public Button previousButton;
+    [Header("Cameras")]
+    public GameObject cam1;
+    public GameObject cam2;
+
+    [Header("Button and Canvas")]
+    public GameObject SelectionCanvas;
+    public GameObject SkipButton;
+    public GameObject PlayButton;
     
     private int currentCar;
     private GameObject[]  carList;
     private void Awake(){
+
+        SelectionCanvas.SetActive(false);
+        PlayButton.SetActive(false);
+        cam2.SetActive(false);
         chooseCar(0);
     }
     
@@ -56,6 +68,15 @@ public class CarSelection : MonoBehaviour
     public void PlayGame(){
         PlayerPrefs.SetInt("CarSelected", currentCar);
         SceneManager.LoadScene("SampleScene");
+    }
+    
+    public void skipButton(){
+        SelectionCanvas.SetActive(true);
+        PlayButton.SetActive(true);
+        SkipButton.SetActive(false);
+        cam1.SetActive(false);
+        cam2.SetActive(true);
+
     }
     
 }
