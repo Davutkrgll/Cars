@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,12 +21,21 @@ public class PlayerCarScripts : MonoBehaviour
     public float accelerationforce = 300f;
     public float breakingForce = 3000f;
     public float presentBreak=0;
-    private float presentAcceleration= 0;
+    public float presentAcceleration= 0;
+    public bool test; 
     
     
     [Header("Car steering")]
     public float wheelsTorque  = 35f;
     private float presentTurnAngle = 0f;
+
+
+    [Header("Car Sounds")]
+    public AudioSource audioSource;
+    public AudioClip accelerationSound;
+    public AudioClip slowAccelerationSound;
+    public AudioClip stopSound;
+
 
 
 
@@ -46,8 +56,19 @@ public class PlayerCarScripts : MonoBehaviour
         
 
         presentAcceleration = accelerationforce * 15 * SimpleInput.GetAxis("Vertical");
-        }
+        if (presentAcceleration >0)
         
+            audioSource.PlayOneShot(accelerationSound,0.2f);
+        
+        else if (presentAcceleration < 0)
+           
+            audioSource.PlayOneShot(slowAccelerationSound, 0.2f);
+
+        else if(presentAcceleration == 0)
+             
+             audioSource.PlayOneShot(stopSound, 0.1f);
+        }
+         
 
 private void CarSteering(){
     
