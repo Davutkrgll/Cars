@@ -44,6 +44,7 @@ public class PlayerCarScripts : MonoBehaviour
         MoveCar();
         CarSteering();
         
+        
     }
     
     private void MoveCar(){
@@ -94,29 +95,44 @@ void SteeringWheels(WheelCollider wheelcol, Transform wheeltrans){
     wheeltrans.rotation = rotation;
 
 }
-public void ApplyBreak(){
-StartCoroutine(carBreaks());
+// public void ApplyBreak(){
+// StartCoroutine(carBreaks());
   
-}
-IEnumerator carBreaks(){
+// }
+// IEnumerator carBreaks(){
 
-    presentBreak = breakingForce*15;
+//     presentBreak = breakingForce;
    
-        frontLeftWheelCollider.brakeTorque =presentBreak ;
-        frontRightWheelCollider.brakeTorque =presentBreak;
-        backLeftCollider.brakeTorque =presentBreak ;
-        backRightCollider.brakeTorque = presentBreak;
+        
+//         backLeftCollider.brakeTorque =presentBreak ;
+//         backRightCollider.brakeTorque = presentBreak;
 
-        yield return new WaitForSeconds(2f);
-        presentBreak =0f;
-        frontLeftWheelCollider.brakeTorque =presentBreak ;
-        frontRightWheelCollider.brakeTorque =presentBreak;
-        backLeftCollider.brakeTorque =presentBreak ;
-        backRightCollider.brakeTorque = presentBreak;
+//         yield return new WaitForSeconds(2f);
+//         presentBreak =0f;
+        
+//         backLeftCollider.brakeTorque =presentBreak ;
+//         backRightCollider.brakeTorque = presentBreak;
 
 
+// }
+
+
+public void Breaks(){
+    StartCoroutine(Break());
 }
-    
+    IEnumerator Break(){
+        if (Input.GetKey(KeyCode.Space))
+        {
+            print("oldu");
+            presentBreak = breakingForce;
+            backLeftCollider.brakeTorque =presentBreak ;
+            backRightCollider.brakeTorque = presentBreak;
+
+            yield return new WaitForSeconds(2f);
+            presentBreak =0f;
+            
+        }
+    }
 
 
 
